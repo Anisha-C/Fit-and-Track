@@ -12,13 +12,11 @@ export default function NavBar(props){
 
 
 
-/*
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
-export default class Navbar extends Component {
+export default function Navbar(){
 
-  render() {
+ 
     return (
       <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
         <Link to="/" className="navbar-brand">ExcerTracker</Link>
@@ -38,4 +36,3 @@ export default class Navbar extends Component {
       </nav>
     );
   }
-}*/
