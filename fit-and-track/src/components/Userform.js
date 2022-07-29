@@ -12,54 +12,32 @@ function Userform(props) {
         }
     }
 
-    async function signupFormHandler(e) {
+    async function formHandler(e) {
         e.preventDefault()
-        console.log(e.target)
+        const url = props.signup ? "/api/users/signup" : "/api/users/login"
+        console.log(url)
+        if (username && password) {
+            const response = await fetch(url, {
+                method: "post",
+                body: JSON.stringify({
+                    username,
+                    // email,
+                    password,
+                }),
+                headers: { "Content-Type": "application/json" },
+            })
 
-            if (username && password) {
-                const response = await fetch("/api/users/signup", {
-                    method: "post",
-                    body: JSON.stringify({
-                        username,
-                        // email,
-                        password,
-                    }),
-                    headers: { "Content-Type": "application/json" },
-                })
-
-                if (response.ok) {
-                    document.location.replace("/dashboard/")
-                } else {
-                    alert(response.statusText)
-                }
+            if (response.ok) {
+                document.location.replace("/dashboard/")
+            } else {
+                alert(response.statusText)
             }
+        }
     }
 
-    async function loginFormHandler(event) {
-            event.preventDefault()
-
-
-
-            if (username && password) {
-                const response = await fetch("/api/users/login", {
-                    method: "post",
-                    body: JSON.stringify({
-                        username,
-                        password,
-                    }),
-                    headers: { "Content-Type": "application/json" },
-                })
-
-                if (response.ok) {
-                    document.location.replace("/dashboard/")
-                } else {
-                    alert(response.statusText)
-                }
-            }
-    }
 
     return (
-        <form onSubmit={signupFormHandler}>
+        <form onSubmit={formHandler}>
             <input name="username" type="text" value={username} onChange={handleInput} />
             <input name="password" type="text" value={password} onChange={handleInput} />
             <button> {props.signup ? "Sign Up" : "Login"}</button>

@@ -50,22 +50,11 @@ function User() {
         //     }
     }
 
-    async function logout() {
-        const response = await fetch('/api/users/logout', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' }
-        });
-
-        if (response.ok) {
-            document.location.replace('/');
-        } else {
-            alert(response.statusText);
-        }
-    }
+   
 
     return (
-        <div id="User" class="intro">
-            <h1 class="">User sign up or login</h1>
+        <div id="User" className="intro">
+            <h1 className="">User sign up or login</h1>
             <p></p>
             <div style={{ display: 'flex', justifyContent: "space-around" }}>
                 <button onClick={() => setsignup(!signup)}>
