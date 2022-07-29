@@ -1,38 +1,24 @@
-export default function NavBar(props){
+// import { a } from 'react-router-dom';
 
-    return(
-        <div style={{display:"flex"}}>
-            <p onClick={() => props.changePage('exercise')}>Exercise</p>
-            <p onClick={() => props.changePage('food')}>Food</p>
-            <p onClick={() => props.changePage('water')}>Water</p>
-            <p onClick={() => props.changePage('Contact')}>Water</p>
-        </div>
-    )
-}
+export default function Navbar(props) {
 
 
-
-// import { Link } from 'react-router-dom';
-
-export default function Navbar(){
-
- 
     return (
-      <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-        <Link to="/" className="navbar-brand">ExcerTracker</Link>
-        <div className="collpase navbar-collapse">
-        <ul className="navbar-nav mr-auto">
-          <li className="navbar-item">
-          <Link to="/" className="nav-link">Exercises</Link>
-          </li>
-          <li className="navbar-item">
-          <Link to="/create" className="nav-link">Create Exercise Log</Link>
-          </li>
-          <li className="navbar-item">
-          <Link to="/user" className="nav-link">Create User</Link>
-          </li>
-        </ul>
-        </div>
-      </nav>
+        <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
+            <a onClick={() => props.changePage('exercise')} className="navbar-brand">Fit and Track</a>
+            <div className="collpase navbar-collapse">
+                <ul className="navbar-nav mr-auto">
+                    <li className="navbar-item">
+                        <a onClick={() => props.changePage('exercise')} className="nav-link">Exercises</a>
+                    </li>
+                    <li className="navbar-item">
+                        <a onClick={() => props.changePage('food')} className="nav-link">Food Log</a>
+                    </li>
+                    <li className="navbar-item">
+                        <a onClick={() => props.changePage('user')} className="nav-link">User</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     );
-  }
+}

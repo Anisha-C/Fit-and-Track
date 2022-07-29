@@ -16,10 +16,10 @@ function App() {
     <div className="App">
       <NavBar changePage={setCurrentPage} />
       <Header title="Fit and Track" subtitle="Welcome to the Fit and Track App" />
-      {currentPage === "Excercise" ? <Exercise />
-        : currentPage === "Food" ? <Food />
-          : currentPage === "Water" ? <Water />
-            : currentPage === "User" ? <User />
+      {currentPage.toLowerCase() === "excercise" ? <Exercise />
+        : currentPage.toLowerCase() === "food" ? <Food />
+          : currentPage.toLowerCase() === "water" ? <Water />
+            : currentPage.toLowerCase() === "user" ? <User />
               : <Contact />}
     </div>
   );
