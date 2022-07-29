@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <NavBar changePage={setCurrentPage} />
       <Header title="Fit and Track" subtitle="Welcome to the Fit and Track App" />
-      {currentPage.toLowerCase() === "excercise" ? <Exercise />
+      {currentPage.toLowerCase() === "exercise" ? <Exercise />
         : currentPage.toLowerCase() === "food" ? <Food />
           : currentPage.toLowerCase() === "water" ? <Water />
             : currentPage.toLowerCase() === "user" ? <User />

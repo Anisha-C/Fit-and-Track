@@ -1,0 +1,23 @@
+import { useState } from "react"
+import Food from "./pages/Food";
+
+function Intakelog(props) {
+    const [Food, setFood] = useState({
+        description: props.description,
+        calories: props.calories,
+        date: props.date,
+    });
+
+    function handleInput(e) {
+        const { name, value } = e.target
+        setFood({ ...exercise, [name]: value })
+    }
+    return (
+        <form>
+            <input name="description" type="text" value={Food.description} onChange={handleInput} />
+            <input name="calories" type="text" value={Food.calories} onChange={handleInput} />
+            <input name="date" type="text" value={Food.date} onChange={handleInput} />
+        </form>
+    )
+}
+export default Intakelog
