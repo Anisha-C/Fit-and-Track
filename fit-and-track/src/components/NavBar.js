@@ -31,7 +31,7 @@ export default function Navbar(props) {
                         <a onClick={() => props.changePage('food')} className="item">Food Log</a>
                     </li>
                     <li>
-                        <a onClick={() => props.changePage('user')} className="item">User</a>
+                        <a onClick={() => props.changePage('user')} className="item">Register</a>
                     </li>
                 </ul>
                 <div class="item">
