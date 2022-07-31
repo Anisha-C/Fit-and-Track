@@ -13,16 +13,23 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://0.0.0.0:27017/fitness', {
+
+const uri = process.env.MONGODB_URI;
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}, err => {
-  if(err) throw err;
-  console.log('Connected to mongodb')
-})
+});
+
+mongoose.connection.once('open', () =>
+  console.log('Mongodb connection established')
+);
 
 const exerciseRouter = require('./routes/exercise');
 const userRouter = require('./routes/user');
+
+app.get('/', (req, res) => {
+  res.send('MERN Exercise Tracker');
+})
 
 app.use('/exercise', exerciseRouter);
 app.use('/user', userRouter);
