@@ -1,9 +1,9 @@
 const router = require('express').Router();
-let Workout = require('../models/workout.model');
+let Exercise = require('../models/Exercise.model');
 
 router.route('/').get((req, res) => {
-    Workout.find()
-        .then(workouts => res.json(workouts))
+    Exercise.find()
+        .then(Exercises => res.json(Exercises))
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
@@ -13,40 +13,40 @@ router.route('/add').post((req, res) => {
     const duration = Number(req.body.duration);
     const date = Date.parse(req.body.date);
 
-    const newWorkout = new Workout({
+    const newExercise = new Exercise({
         username,
         description,
         duration,
         date
     });
 
-    newWorkout.save()
-        .then(() => res.json('Workout added!'))
+    newExercise.save()
+        .then(() => res.json('Exercise added!'))
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
 router.route('/:id').get((req, res) => {
-    Workout.findById(req.params.id)
-        .then(workout => res.json(workout))
+    Exercise.findById(req.params.id)
+        .then(Exercise => res.json(Exercise))
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
 router.route('/:id').delete((req, res) => {
-    Workout.findByIdAndDelete(req.params.id)
-        .then(() => res.json('Workout deleted.'))
+    Exercise.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Exercise deleted.'))
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
 router.route('/update/:id').post((req, res) => {
-    Workout.findById(req.params.id)
-        .then(workout => {
-            workout.username = req.body.username;
-            workout.description = req.body.description;
-            workout.duration = Number(req.body.duration);
-            workout.date = Date.parse(req.body.date);
+    Exercise.findById(req.params.id)
+        .then(Exercise => {
+            Exercise.username = req.body.username;
+            Exercise.description = req.body.description;
+            Exercise.duration = Number(req.body.duration);
+            Exercise.date = Date.parse(req.body.date);
 
-            workout.save()
-                .then(() => res.json('Workout updated!'))
+            Exercise.save()
+                .then(() => res.json('Exercise updated!'))
                 .catch(err => res.status(400).json('Error: ' + err))
         })
         .catch(err => res.status(400).json('Error: ' + err))

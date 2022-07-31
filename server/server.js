@@ -15,14 +15,17 @@ app.use(cors());
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://0.0.0.0:27017/fitness', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+  useUnifiedTopology: true,
+}, err => {
+  if(err) throw err;
+  console.log('Connected to mongodb')
+})
 
-const workoutsRouter = require('./routes/workouts');
-const usersRouter = require('./routes/users');
+const exerciseRouter = require('./routes/exercise');
+const userRouter = require('./routes/user');
 
-app.use('/workouts', workoutsRouter);
-app.use('/users', usersRouter);
+app.use('/exercise', exerciseRouter);
+app.use('/user', userRouter);
 
 
 app.listen(port, () => {
