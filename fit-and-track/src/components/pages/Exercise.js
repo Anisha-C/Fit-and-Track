@@ -1,5 +1,6 @@
-import { useState } from "react"
-import Exerciselog from "../Exerciselog"
+import { useState } from "react";
+import Exerciselog from "../Exerciselog";
+import '../../semantic/dist/components/grid.css';
 //dummy data for viewing while backend is being set up
 const tempdata = [
     {
@@ -28,9 +29,11 @@ function Exercise(props) {
         return exercises
     }
     return (
-        <div id="Exercise" className="intro">
-            <h1 className="">Exercise Log</h1>
-            {savedExercises.length && savedExercises.map((ex, i) => <Exerciselog key={ex.description + i} description={ex.description} duration={ex.duration} date={ex.date} />)}
+        <div class="ui two column centered grid">
+            <div>
+                <h1>Exercise Log</h1>
+                {savedExercises.length && savedExercises.map((ex, i) => <Exerciselog key={ex.description + i} description={ex.description} duration={ex.duration} date={ex.date} />)}
+            </div>
         </div>
 
     )

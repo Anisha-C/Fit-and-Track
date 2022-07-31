@@ -38,13 +38,13 @@ function Food(props) {
 
 
 
-function Food(){
+// function Food(){
 
-    return (
-        <div>
-            <h1>Food</h1>
-        </div>
+//     return (
+//         <div>
+//             <h1>Food</h1>
+//         </div>
 
-    )
-}
+//     )
+// }
 export default Food

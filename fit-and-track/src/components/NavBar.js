@@ -1,4 +1,6 @@
 // import { a } from 'react-router-dom';
+import '../semantic/dist/components/menu.css';
+import'../semantic/dist/components/button.css';
 
 export default function Navbar(props) {
 
@@ -16,21 +18,25 @@ export default function Navbar(props) {
     }
 
     return (
-        <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-            <a onClick={() => props.changePage('exercise')} className="navbar-brand">Fit and Track</a>
-            <div className="collpase navbar-collapse">
-                <ul style={{ display: "flex", listStyle: "none"}} className="navbar-nav mr-auto">
-                    <li className="navbar-item">
-                        <a onClick={() => props.changePage('exercise')} className="nav-link">Exercises</a>
+        <nav class='ui sticky'>
+            <div class="ui massive menu">
+                <div class="header item">
+                    Fit and Track
+                </div>
+                <ul style={{ display: "flex", listStyle: "none"}} class ='right menu'>
+                    <li>
+                        <a onClick={() => props.changePage('exercise')} className="item">Exercises</a>
                     </li>
-                    <li className="navbar-item">
-                        <a onClick={() => props.changePage('food')} className="nav-link">Food Log</a>
+                    <li>
+                        <a onClick={() => props.changePage('food')} className="item">Food Log</a>
                     </li>
-                    <li className="navbar-item">
-                        <a onClick={() => props.changePage('user')} className="nav-link">User</a>
+                    <li>
+                        <a onClick={() => props.changePage('user')} className="item">User</a>
                     </li>
                 </ul>
-                <button onClick={logout} >Log Out</button>
+                <div class="item">
+                    <div onClick={logout}  class='ui primary button'>Log Out</div>
+                </div>
             </div>
         </nav>
     );
