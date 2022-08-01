@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 
-const uri = 'mongodb://127.0.0.1:27017/Fit' || process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI;
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
