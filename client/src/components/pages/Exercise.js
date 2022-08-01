@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Exerciselog from "../Exerciselog"
 //dummy data for viewing while backend is being set up
 const tempdata = [
@@ -20,6 +20,12 @@ const tempdata = [
 ]
 function Exercise(props) {
     const [savedExercises, setsavedExercises] = useState(tempdata)
+
+    useEffect(() => {
+        fetch("/exercise").then(res => {
+            setsavedExercises(res)
+        })
+    }, [])
     //Delete line above and uncomment bottom once backend has exercise route
     // const [savedExercises, setsavedExercises] = useState(getExercises())
     async function getExercises() {

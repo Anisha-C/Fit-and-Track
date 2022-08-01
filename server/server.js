@@ -7,14 +7,14 @@ require('dotenv').config();
 
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // Middlewares
 app.use(express.json());
 app.use(cors());
 
 
-const uri = process.env.MONGODB_URI;
+const uri = 'mongodb://127.0.0.1:27017/Fit' || process.env.MONGODB_URI;
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
