@@ -8,6 +8,12 @@ function Intakelog(props) {
         date: props.date,
     });
 
+    // const [Water, setWater] = useState({
+    //     amount: props.amount,
+    //      hour: props.hour,
+    //     date: props.date,
+    // });
+
     function handleInput(e) {
         const { name, value } = e.target
         setFood({ ...exercise, [name]: value })
@@ -18,6 +24,12 @@ function Intakelog(props) {
             <input name="calories" type="text" value={Food.calories} onChange={handleInput} />
             <input name="date" type="text" value={Food.date} onChange={handleInput} />
         </form>
+
+/* <form>
+<input name="amount" type="text" value={Water.description} onChange={handleInput} />
+<input name="hour" type="text" value={Water.calories} onChange={handleInput} />
+<input name="date" type="text" value={Water.date} onChange={handleInput} />
+</form> */
     )
 }
 export default Intakelog

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Exerciselog from "../Intakelog"
+import Intakelog from "../Intakelog"
 //dummy data for viewing while backend is being set up
 const tempdata = [
     {
@@ -29,7 +29,7 @@ function Food(props) {
     }
     return (
         <div id="Food" className="intro">
-            <h1 className="">Food Log</h1>
+            <h1 className="">Intake Log</h1>
             {savedFoods.length && savedFoods.map((ex, i) => <intakelog key={ex.description + i} description={ex.description} duration={ex.duration} date={ex.date} />)}
         </div>
 
