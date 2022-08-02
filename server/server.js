@@ -27,6 +27,7 @@ mongoose.connection.once('open', () =>
 const exerciseRouter = require('./routes/exercise');
 const userRouter = require('./routes/user');
 const intakeRouter = require('./routes/intake');
+const waterRouter = require('./routes/water');
 
 app.get('/', (req, res) => {
   res.send('MERN Exercise Tracker');
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
 app.use('/exercise', exerciseRouter);
 app.use('/user', userRouter);
 app.use('/intake', intakeRouter);
+app.use('/water', waterRouter);
 
 
 app.listen(port, () => {
