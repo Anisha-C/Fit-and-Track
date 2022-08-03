@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+//Routes
+const striperoutes = require('./routes/stripe-route');
 
 require('dotenv').config();
 
@@ -14,7 +16,9 @@ const port = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
+app.use(express.urlencoded({extended: true}));
 
+app.use('/api/stripe', striperoutes);
 
 const uri = 'mongodb://127.0.0.1:27017/Fit' || process.env.MONGODB_URI;
 mongoose.connect(uri, {
