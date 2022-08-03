@@ -54,10 +54,12 @@ function Userform(props) {
                     <label>Password</label>
                     <input name="password" type="password" placeholder="Password" value={password} onChange={handleInput} />
                     </div>
-                    <button class="ui primary labeled icon button" type="submit">
-                    <i class="unlock alternate icon"></i>
-                    {props.signup ? "Sign Up" : "Login"}
-                    </button>
+                    <div>
+                        <button class="ui primary labeled icon button" type="submit">
+                        <i class="unlock alternate icon"></i>
+                        {props.signup ? "Sign Up" : "Login"}
+                        </button>
+                    </div>
                 </form>
                 </div>
                 </div>

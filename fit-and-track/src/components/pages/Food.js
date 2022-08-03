@@ -1,5 +1,8 @@
 import { useState } from "react"
 import Exerciselog from "../Intakelog"
+
+import '../../semantic/dist/components/grid.css';
+import '../../semantic/dist/components/header.css';
 //dummy data for viewing while backend is being set up
 const tempdata = [
     {
@@ -28,9 +31,13 @@ function Food(props) {
         return Foods
     }
     return (
-        <div id="Food" className="intro">
-            <h1 className="">Food Log</h1>
-            {savedFoods.length && savedFoods.map((ex, i) => <intakelog key={ex.description + i} description={ex.description} duration={ex.duration} date={ex.date} />)}
+        <div class="ui two column centered grid">
+            <div class="center aligned column">
+                <h1>Food Log</h1>
+            </div>
+            <div class="four column centered row">
+                {savedFoods.length && savedFoods.map((ex, i) => <intakelog key={ex.description + i} description={ex.description} duration={ex.duration} date={ex.date} />)}
+            </div>
         </div>
 
     )
