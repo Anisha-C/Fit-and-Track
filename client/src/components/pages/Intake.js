@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Intakelog from "../Intakelog"
 
 //dummy data for viewing while backend is being set up
@@ -23,8 +23,15 @@ function Intake(props) {
     const [savedIntakes, setsavedIntakes] = useState(tempdata)
     //Delete line above and uncomment bottom once backend has food route
     // const [savedExercises, setsavedExercises] = useState(getExercises())
+
+    useEffect(() => {
+    setsavedIntakes(getIntakes())
+        
+    }, [])
+
+
     async function getIntakes() {
-        const Intakes = await fetch("/api/user/food")
+        const Intakes = await fetch("/intake")
         console.log(Intakes)
         return Intakes
     }

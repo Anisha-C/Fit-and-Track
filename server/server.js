@@ -14,31 +14,31 @@ app.use(express.json());
 app.use(cors());
 
 
-const uri = process.env.MONGODB_URI;
+const uri = 'mongodb://127.0.0.1:27017/Fit' || process.env.MONGODB_URI;
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
-mongoose.connection.once('open', () =>
-  console.log('Mongodb connection established')
-);
 
 const exerciseRouter = require('./routes/exercise');
 const userRouter = require('./routes/user');
 const intakeRouter = require('./routes/intake');
 const waterRouter = require('./routes/water');
 
-app.get('/', (req, res) => {
-  res.send('MERN Exercise Tracker');
-})
+// app.get('/', (req, res) => {
+//   res.send('MERN Exercise Tracker');
+// })
 
 app.use('/exercise', exerciseRouter);
 app.use('/user', userRouter);
 app.use('/intake', intakeRouter);
 app.use('/water', waterRouter);
 
+mongoose.connection.once('open', () =>{
+  console.log('Mongodb connection established')
 
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+  app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
 })
+});
+
