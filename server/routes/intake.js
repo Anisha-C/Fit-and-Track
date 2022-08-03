@@ -2,7 +2,7 @@ const router = require('express').Router();
 let intake = require('../models/intake.model');
 
 router.route('/').get((req, res) => {
-    intake.find()
+    intake.find({})
         .then(intakes => res.json(intakes))
         .catch(err => res.status(400).json('Error: ' + err))
 })

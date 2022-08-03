@@ -2,43 +2,54 @@ import { useState, useEffect } from "react"
 import Intakelog from "../Intakelog"
 
 //dummy data for viewing while backend is being set up
-const tempdata = [
-    {
-        description: "d",
-        calories: "g",
-        date: "f"
-    },
-    {
-        description: "a",
-        calories: "b",
-        date: "c"
-    },
-    {
-        description: "l",
-        calories: "m",
-        date: "n"
-    },
-]
+
 function Intake(props) {
-    const [savedIntakes, setsavedIntakes] = useState(tempdata)
+    const [savedIntakes, setsavedIntakes] = useState(null)
     //Delete line above and uncomment bottom once backend has food route
     // const [savedExercises, setsavedExercises] = useState(getExercises())
-
-    useEffect(() => {
-    setsavedIntakes(getIntakes())
+    const [newIntakes, setnewIntakes] = useState({
         
+    })
+    useEffect(() => {
+        getIntakes();
+
     }, [])
+    useEffect(() => {
+        console.log(savedIntakes)
+
+    }, [savedIntakes])
+
+    function getIntakes() {
+
+        fetch("http://localhost:3001/intake", {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+        }).then(res => {
+            return res.json()
+        }).then(res => {
+            setsavedIntakes(res)
+
+        })
 
 
-    async function getIntakes() {
-        const Intakes = await fetch("/intake")
-        console.log(Intakes)
-        return Intakes
     }
     return (
         <div id="Intake" className="intro">
-            <h1 className="">Intake Log</h1>
-            {savedIntakes.length && savedIntakes.map((ex, i) => <Intakelog key={ex.description + i} description={ex.description} calories={ex.calories} date={ex.date} />)}
+            <h1>Intake Log</h1>
+            <div>
+                <input type="text" value={""} name="" />
+                <input type="text" value={""} name="" />
+                <input type="text" value={""} name="" />
+                <input type="text" value={""} name="" />
+                <input type="text" value={""} name="" />
+                <input type="text" value={""} name="" />
+
+            </div>
+            {savedIntakes && savedIntakes.map((ex, i) => <Intakelog key={ex.description + i} description={ex.description} calories={ex.calories} date={ex.date} />)}
         </div>
 
     )

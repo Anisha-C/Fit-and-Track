@@ -9,7 +9,9 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3001;
 
+
 // Middlewares
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 
