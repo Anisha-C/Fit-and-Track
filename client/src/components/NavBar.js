@@ -1,10 +1,10 @@
 // import { a } from 'react-router-dom';
 
-import {Image} from 'semantic-ui-react';
+// import {Image} from 'semantic-ui-react';
 import '../semantic/dist/components/menu.css';
 import'../semantic/dist/components/button.css';
 import '../semantic/dist/components/image.css';
-import myLogo from '/assets/images/fit_and_track.jpg';
+// import myLogo from '/assets/images/fit_and_track.jpg';
 
 export default function Navbar(props) {
 
@@ -25,7 +25,7 @@ export default function Navbar(props) {
         <nav class='ui sticky'>
             <div class="ui massive menu">
                 <div class="header item">
-                    <Image class="ui medium circular image" src= '../assets/images/fit_and_track.jpg' />
+                    {/* <Image class="ui medium circular image" src= '/assets/images/fit_and_track.jpg' /> */}
                     Fit and Track
                 </div>
                 <ul style={{ display: "flex", listStyle: "none"}} class ='right menu'>
