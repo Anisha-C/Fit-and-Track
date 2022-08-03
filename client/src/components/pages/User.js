@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import Userform from "../Userform"
 
 
-function User() {
+function User({changePage}) {
     const [signup, setsignup] = useState(true)
     async function signupFormHandler(event) {
         event.preventDefault()
@@ -53,15 +53,20 @@ function User() {
    
 
     return (
-        <div id="User" className="intro">
-            <h1 className="">User sign up or login</h1>
+        <div id="User" className='ui centered grid'>
+            <h1 className="five wide column">Create a New Account or Log In!</h1>
             <p></p>
-            <div style={{ display: 'flex', justifyContent: "space-around" }}>
-                <button onClick={() => setsignup(!signup)}>
+            <div className="six wide coulmn">
+                <Userform signup = {signup}/>
+            </div>
+            <div style={{ display: 'flex', justifyContent: "space-around" }} className="three wide column">
+                <button onClick={() =>{
+                     setsignup(!signup)
+                     changePage('exercise')
+                     }} className="ui primary button">
                     {signup ? "Already Have an account?" : "Register for a new account"}
                 </button>
             </div>
-            <Userform signup = {signup}/>
         </div>
 
 

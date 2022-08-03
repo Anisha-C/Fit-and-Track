@@ -69,7 +69,7 @@ function Intake(props) {
         }).catch(err => {
             console.log(err)
         })
-
+//.then()
     }
     return (
         <div id="Intake" className="intro">

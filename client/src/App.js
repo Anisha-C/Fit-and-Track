@@ -31,7 +31,7 @@ function App() {
       <Header title="Fit and Track" subtitle="Welcome to the Fit and Track App" />
       {currentPage.toLowerCase() === "exercise" ? <Exercise />
         : currentPage.toLowerCase() === "intake" ? <Intake />
-          : currentPage.toLowerCase() === "user" ? <User />
+          : currentPage.toLowerCase() === "user" ? <User changePage={setCurrentPage}/>
             : null}
       <div>
         <Stripe
