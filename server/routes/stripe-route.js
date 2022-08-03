@@ -3,7 +3,7 @@ const express = require('express');
 const stripe = require ("stripe")("sk_test_51LSWYcF6Vu2ilumGm8I4WVWUeEQaCV70GvulA2PGn4fdSqUYxbNBKdyj1RFflmTGnqhcnj79UVm6MHFuRlxvFRO6004q6rYIEI");
 const {v4: uuidv4} = require('uuid');
 
-const router = express.router();
+const router = express.Router();
 
 router.get('/', (req, res, next) => {
     console.log("GET Response from Researcher");

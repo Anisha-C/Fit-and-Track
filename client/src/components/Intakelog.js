@@ -11,7 +11,7 @@ function Intakelog(props) {
     const [Water, setWater] = useState({
         amount: props.amount,
         hour: props.hour,
-        date: props.date,
+        day: props.day,
     });
 
     function handleFoodInput(e) {
