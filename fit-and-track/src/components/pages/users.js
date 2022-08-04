@@ -1,139 +1,143 @@
 const express = require("express");
-
 const app = express();
+const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-app.use(express.json());
+// require database connection
+const dbConnect = require("./db/dbConnect");
+const User = require("./db/userModel");
+const auth = require("./auth");
 
-app.use(express.urlencoded({ extended: false }));
+// execute database connection
+dbConnect();
 
-app.use("/api/users", require("./routes/api/users"));
-
-app.listen(3000, () => console.log('Server started'));
-
-const express = require("express");
-
-const router = express.Router();
-
-const uuid = require("uuid");
-
-let users = require("../../Users");
-
-
-
-router.get("/", (req, res) => {
-
-    res.json(users);
-
+// Curb Cores Error by adding a header here
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  next();
 });
 
+// body parser configuration
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-
-router.get("/:id", (req, res) => {
-
-    const found = users.some(user => user.id === parseInt(req.params.id));
-
-
-
-    if (found) {
-
-        res.json(users.filter(user => user.id === parseInt(req.params.id)));
-
-    } else {
-
-        res.sendStatus(400);
-
-    }
-
+app.get("/", (request, response, next) => {
+  response.json({ message: "Hey! This is your server response!" });
+  next();
 });
 
+// register endpoint
+app.post("/register", (request, response) => {
+  // hash the password
+  bcrypt
+    .hash(request.body.password, 10)
+    .then((hashedPassword) => {
+      // create a new user instance and collect the data
+      const user = new User({
+        email: request.body.email,
+        password: hashedPassword,
+      });
 
-
-router.post("/", (req, res) => {
-
-    const newUser = {
-
-        id: uuid.v4(),
-
-        name: req.body.name,
-
-        email: req.body.email
-
-    };
-
-
-
-    if (!newUser.name || !newUser.email) {
-
-        return res.sendStatus(400);
-
-    }
-
-    users.push(newUser);
-
-    res.json(users);
-
-});
-
-//Update User
-
-router.put("/:id", (req, res) => {
-
-    const found = users.some(user => user.id === parseInt(req.params.id));
-
-    if (found) {
-
-        const updateUser = req.body;
-
-        users.forEach(user => {
-
-            if (user.id === parseInt(req.params.id)) {
-
-                user.name = updateUser.name ? updateUser.name : user.name;
-
-                user.email = updateUser.email ? updateUser.email : user.email;
-
-                res.json({ msg: "User updated", user });
-
-            }
-
+      // save the new user
+      user
+        .save()
+        // return success if the new user is added to the database successfully
+        .then((result) => {
+          response.status(201).send({
+            message: "User Created Successfully",
+            result,
+          });
+        })
+        // catch erroe if the new user wasn't added successfully to the database
+        .catch((error) => {
+          response.status(500).send({
+            message: "Error creating user",
+            error,
+          });
         });
-
-    } else {
-
-        res.sendStatus(400);
-
-    }
-
+    })
+    // catch error if the password hash isn't successful
+    .catch((e) => {
+      response.status(500).send({
+        message: "Password was not hashed successfully",
+        e,
+      });
+    });
 });
 
+// login endpoint
+app.post("/login", (request, response) => {
+  // check if email exists
+  User.findOne({ email: request.body.email })
 
+    // if email exists
+    .then((user) => {
+      // compare the password entered and the hashed password found
+      bcrypt
+        .compare(request.body.password, user.password)
 
-//Delete User
+        // if the passwords match
+        .then((passwordCheck) => {
 
-router.delete("/:id", (req, res) => {
+          // check if password matches
+          if(!passwordCheck) {
+            return response.status(400).send({
+              message: "Passwords does not match",
+              error,
+            });
+          }
 
-    const found = users.some(user => user.id === parseInt(req.params.id))
+          //   create JWT token
+          const token = jwt.sign(
+            {
+              userId: user._id,
+              userEmail: user.email,
+            },
+            "RANDOM-TOKEN",
+            { expiresIn: "24h" }
+          );
 
-    if (found) {
-
-        users = users.filter(user => user.id !== parseInt(req.params.id))
-
-        res.json({
-
-            msg: "User deleted",
-
-            users
-
+          //   return success response
+          response.status(200).send({
+            message: "Login Successful",
+            email: user.email,
+            token,
+          });
+        })
+        // catch error if password do not match
+        .catch((error) => {
+          response.status(400).send({
+            message: "Passwords does not match",
+            error,
+          });
         });
-
-    } else {
-
-        res.sendStatus(400);
-
-    }
-
+    })
+    // catch error if email does not exist
+    .catch((e) => {
+      response.status(404).send({
+        message: "Email not found",
+        e,
+      });
+    });
 });
 
+// free endpoint
+app.get("/free-endpoint", (request, response) => {
+  response.json({ message: "You are free to access me anytime" });
+});
 
+// authentication endpoint
+app.get("/auth-endpoint", auth, (request, response) => {
+  response.send({ message: "You are authorized to access me" });
+});
 
-module.exports = router;
+module.exports = app;
