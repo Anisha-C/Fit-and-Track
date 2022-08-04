@@ -15,7 +15,7 @@ const port = process.env.PORT || 3001;
 // Middlewares
 app.use(express.json());
 app.use(cors());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 // app.use('/api/stripe', striperoutes);
 
@@ -39,11 +39,19 @@ app.use('/user', userRouter);
 app.use('/intake', intakeRouter);
 app.use('/water', waterRouter);
 
-mongoose.connection.once('open', () =>{
+// Step 1:
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+// Step 2:
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+});
+
+
+mongoose.connection.once('open', () => {
   console.log('Mongodb connection established')
 
   app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
-})
+    console.log(`Server is running on port: ${port}`);
+  })
 });
 
