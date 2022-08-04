@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let intake = require('../models/intake.model');
+let water = require(`../models/water.model`)
 
 router.route('/').get((req, res) => {
     intake.find({})
@@ -8,18 +9,30 @@ router.route('/').get((req, res) => {
 })
 
 router.route('/add').post((req, res) => {
+    console.log("yo")
     const description = req.body.description;
     const calories = Number(req.body.calories);
     const date = Date.parse(req.body.date);
+    const amount = req.body.amount;
+    const hour = Number(req.body.hour);
+
+
 
     const newintake = new intake({
         description,
         calories,
-        date
+        date,
     });
 
+    const newwater = new water({
+        amount,
+        hour,
+        day: date,
+    });
+    console.log(newwater)
     newintake.save()
-        .then(() => res.json('intake added!'))
+        .then(() => newwater.save())
+        .then(() => res.json(`Intake and Water added`))
         .catch(err => res.status(400).json('Error: ' + err))
 })
 

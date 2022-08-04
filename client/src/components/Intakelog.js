@@ -19,10 +19,10 @@ function Intakelog(props) {
         setFood({ ...Food, [name]: value })
     }
 
-    function handleWaterInput(e) {
-        const { name, value } = e.target
-        setWater({ ...Water, [name]: value })
-    }
+    // function handleWaterInput(e) {
+    //     const { name, value } = e.target
+    //     setWater({ ...Water, [name]: value })
+    // }
     return (
         <div>
             <form>
@@ -31,11 +31,11 @@ function Intakelog(props) {
                 <input name="date" type="text" value={Food.date} onChange={handleFoodInput} />
             </form>
 
-            <form>
+            {/* <form>
                 <input name="amount" type="text" value={Water.amount} onChange={handleWaterInput} />
                 <input name="hour" type="text" value={Water.hour} onChange={handleWaterInput} />
                 <input name="date" type="text" value={Water.date} onChange={handleWaterInput} />
-            </form>
+            </form> */}
         </div>
     )
 }

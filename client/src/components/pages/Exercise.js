@@ -11,15 +11,16 @@ function Exercise(props) {
         duration: "",
         date: "",
     })
-    // useEffect(() => {
-    //     fetch("/exercise").then(res => {
-    //         setsavedExercises(res)
-    //     })
-    // }, [])
     useEffect(() => {
-        getExercise();
-
+        fetch("http://localhost:3001/exercise").then(res => {
+            return res.json()
+        }).then((data) => setsavedExercises(data))
     }, [])
+
+    // useEffect(() => {
+    //     getExercise();
+    //     console.log(getExercise())
+    // }, [])
 
     useEffect(() => {
         console.log(savedExercises)
@@ -30,14 +31,14 @@ function Exercise(props) {
         const { name, value } = e.target
         setnewExercise(prev => ({ ...prev, [name]: value }))
     }
-    
+
     async function getExercise() {
         const exercises = await fetch("/exercise")
         console.log(exercises)
         return exercises
     }
     function saveExercise() {
-    
+
         fetch("http://localhost:3001/exercise/add", {
             method: 'POST',
             headers: {
@@ -54,24 +55,31 @@ function Exercise(props) {
             })
         }).catch(err => {
             console.log(err)
-        })}
-    
+        })
+    }
+
     return (
         <div class="ui two column centered grid">
             <div>
                 <h1>Exercise Log</h1>
                 <div>
-                <label for="description" >Description</label>
-                <input id="description" type="text" onChange={handleexerciseInput} value={newExercise.description} name="description" />
-                <label for="duration" >Duration</label>
-                <input id="duration" type="text" onChange={handleexerciseInput} value={newExercise.duration} name="duration" />
-                <label for="date" >Date</label>
-                <input id="date" type="text" onChange={handleexerciseInput} value={newExercise.date} name="date" />
-                <button onClick={saveExercise}>Submit</button>
-            </div>
+                    <label for="description" >Description</label>
+                    <input id="description" type="text" onChange={handleexerciseInput} value={newExercise.description} name="description" />
+                    <label for="duration" >Duration</label>
+                    <input id="duration" type="text" onChange={handleexerciseInput} value={newExercise.duration} name="duration" />
+                    <label for="date" >Date</label>
+                    <input id="date" type="text" onChange={handleexerciseInput} value={newExercise.date} name="date" />
+                    <button onClick={saveExercise}>Submit</button>
+                </div>
                 <div className="ui list">
                     <div class="item">
-                        {savedExercises && savedExercises.map((ex, i) => <Exerciselog key={ex.description + i} description={ex.description} duration={ex.duration} date={ex.date} />)}
+                        {savedExercises && savedExercises.map((ex, i) =>
+                            <Exerciselog
+                                key={ex.description + i}
+                                description={ex.description}
+                                duration={ex.duration}
+                                date={ex.date} />
+                        )}
                     </div>
                 </div>
             </div>

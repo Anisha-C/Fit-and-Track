@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended: true}));
 
 // app.use('/api/stripe', striperoutes);
 
-const uri = 'mongodb://127.0.0.1:27017/Fit' || process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/Fit';
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

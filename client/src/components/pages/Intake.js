@@ -5,16 +5,18 @@ import Intakelog from "../Intakelog"
 
 function Intake(props) {
     const [savedIntakes, setsavedIntakes] = useState(null)
+    // const [savedWater, setsavedWater] = useState(null)
     //Delete line above and uncomment bottom once backend has food route
     // const [savedExercises, setsavedExercises] = useState(getExercises())
     const [newIntakes, setnewIntakes] = useState({
         description: "",
         calories: "",
         date: "",
-        amount: "",
-        hour: "",
-        day: "",
+        // amount: "",
+        // hour: "",
+        // day: "",
     })
+
     useEffect(() => {
         getIntakes();
 
@@ -42,9 +44,21 @@ function Intake(props) {
             return res.json()
         }).then(res => {
             setsavedIntakes(res)
-
-
         })
+
+
+        // fetch("http://localhost:3001/water", {
+        //     method: 'GET',
+        //     headers: {
+        //         Accept: 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+
+        // }).then(res => {
+        //     return res.json()
+        // }).then(res => {
+        //     setsavedWater(res)
+        // })
 
 
     }
@@ -62,14 +76,14 @@ function Intake(props) {
                 description: "",
                 calories: "",
                 date: "",
-                amount: "",
-                hour: "",
-                day: "",
+                // amount: "",
+                // hour: "",
+                // day: "",
             })
         }).catch(err => {
             console.log(err)
         })
-//.then()
+        //.then()
     }
     return (
         <div id="Intake" className="intro">
@@ -81,15 +95,25 @@ function Intake(props) {
                 <input id="calories" type="text" onChange={handleintakeInput} value={newIntakes.calories} name="calories" />
                 <label for="date" >Date</label>
                 <input id="date" type="text" onChange={handleintakeInput} value={newIntakes.date} name="date" />
-                <label for="amount" >Amount</label>
+                {/* <label for="amount" >Amount</label>
                 <input id="amount" type="text" onChange={handleintakeInput} value={newIntakes.amount} name="amount" />
                 <label for="hour" >Hour</label>
                 <input id="hour" type="text" onChange={handleintakeInput} value={newIntakes.hour} name="hour" />
                 <label for="day" >Date</label>
-                <input id="day" type="text" onChange={handleintakeInput} value={newIntakes.day} name="day" />
+                <input id="day" type="text" onChange={handleintakeInput} value={newIntakes.day} name="day" /> */}
                 <button onClick={saveIntake}>Submit</button>
             </div>
-            {savedIntakes && savedIntakes.map((ex, i) => <Intakelog key={ex.description + i} description={ex.description} calories={ex.calories} date={ex.date} />)}
+            {savedIntakes && savedIntakes.map((ex, i) =>
+                <Intakelog
+                    key={ex.description + i}
+                    description={ex.description}
+                    calories={ex.calories}
+                    date={ex.date}
+                    // amount={savedWater[i].amount}
+                    // hour={savedWater[i].hour}
+                    // day={savedWater[i].day} 
+                    />
+            )}
         </div>
 
     )
