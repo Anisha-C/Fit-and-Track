@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Exerciselog from "../Exerciselog";
-import '../../semantic/dist/components/grid.css';
-import '../../semantic/dist/components/list.css';
+// import '../../semantic/dist/components/grid.css';
+// import '../../semantic/dist/components/list.css';
 
 
 function Exercise(props) {

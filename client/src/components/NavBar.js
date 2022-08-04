@@ -1,9 +1,9 @@
 // import { a } from 'react-router-dom';
 
 // import {Image} from 'semantic-ui-react';
-import '../semantic/dist/components/menu.css';
-import'../semantic/dist/components/button.css';
-import '../semantic/dist/components/image.css';
+// import '../semantic/dist/components/menu.css';
+// import'../semantic/dist/components/button.css';
+// import '../semantic/dist/components/image.css';
 // import myLogo from '/assets/images/fit_and_track.jpg';
 
 export default function Navbar(props) {

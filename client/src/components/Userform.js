@@ -1,6 +1,6 @@
 import { useState } from "react";
-import '../semantic/dist/components/grid.css';
-import '../semantic/dist/components/icon.css';
+// import '../semantic/dist/components/grid.css';
+// import '../semantic/dist/components/icon.css';
 
 
 function Userform(props) {

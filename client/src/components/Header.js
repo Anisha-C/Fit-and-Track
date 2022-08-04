@@ -1,6 +1,6 @@
-import '../semantic/dist/components/segment.css';
-import '../semantic/dist/components/header.css';
-import '../semantic/dist/components/grid.css';
+// import '../semantic/dist/components/segment.css';
+// import '../semantic/dist/components/header.css';
+// import '../semantic/dist/components/grid.css';
 
 function Header(props){
 
