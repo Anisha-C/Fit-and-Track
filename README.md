@@ -23,4 +23,4 @@ Express /
 ## Deployment
 
 ![p3page](https://user-images.githubusercontent.com/100245563/182756290-a9c117c9-b794-412b-9774-847b7acbc273.png)
-Deployment URL: 
+Deployment URL: https://fitandtrack.herokuapp.com/
